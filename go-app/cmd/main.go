@@ -27,6 +27,11 @@ var (
 		Name: "go_app_response_latency",
 		Help: "Response latency",
 	}, []string{"path"})
+	// RequestResponseTimeHistogram is a sample histogram metrics
+	RequestResponseTimeHistogram = promauto.NewHistogramVec(prometheus.HistogramOpts{
+		Name: "go_app_response_latency_histogram",
+		Help: "Response latency (histogram)",
+	}, []string{"path"})
 )
 
 func prometheusHandler() gin.HandlerFunc {
@@ -44,6 +49,7 @@ func latencySampler() gin.HandlerFunc {
 		c.Next()
 
 		RequestResponseTime.WithLabelValues(c.Request.RequestURI).Observe(time.Since(startTime).Seconds())
+		RequestResponseTimeHistogram.WithLabelValues(c.Request.RequestURI).Observe(time.Since(startTime).Seconds())
 	}
 }
 
