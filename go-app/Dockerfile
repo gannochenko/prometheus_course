@@ -17,11 +17,11 @@ WORKDIR /build
 COPY go.mod go.sum ./
 RUN go mod download
 COPY . /build
-RUN GOOS=linux CGO_ENABLED=0 GOARCH=amd64 go build  -o app ./go-app/cmd/main.go
+RUN GOOS=linux CGO_ENABLED=0 GOARCH=amd64 go build -o app ./cmd/main.go
 
 FROM alpine:3.15.0 as base
 COPY --from=builder /build/app /app
 
-EXPOSE 8080 9999
+EXPOSE 8080
 
 ENTRYPOINT ["/app"]

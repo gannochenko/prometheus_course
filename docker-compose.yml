@@ -35,22 +35,14 @@ services:
 
   go-app:
     build:
-      context: ../
-      dockerfile: ./go-app/internal-api/Dockerfile
+      context: ./go-app
       args:
         GITHUB_USERNAME: ${GITHUB_USERNAME}
         GITHUB_TOKEN: ${GITHUB_TOKEN}
     ports:
       - "8080:8080"
-      - "9999:9999"
     restart: always
-    depends_on:
-      - supplier-portal-psql
-      - supplier-portal-pubsub
-      - supplier-portal-migrate
-      - jaeger
-    env_file: .envs/supplier-portal.env
-    volumes:
-      - "./:/build/infra/"
+#    volumes:
+#      - "./:/build/infra/"
     networks:
-      - supplier-portal-net
+      - back-tier
