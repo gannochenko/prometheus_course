@@ -1,0 +1,5 @@
+groups:
+  - name: my-rules
+    rules:
+      - record: job:go_app_response_latency:5m
+        expr: rate(go_app_response_latency_sum[5m]) / rate(go_app_response_latency_count[5m])

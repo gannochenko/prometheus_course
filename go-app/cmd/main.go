@@ -22,7 +22,7 @@ var (
 		Help: "HTTP Request in progress",
 	})
 	// RequestResponseTime is a sample summary metrics
-	// promql average latency: rate(go_app_response_latency_sum[5m]) / rate(go_app_response_latency_count[5m])
+	// promql average latency:
 	RequestResponseTime = promauto.NewSummaryVec(prometheus.SummaryOpts{
 		Name: "go_app_response_latency",
 		Help: "Response latency",
