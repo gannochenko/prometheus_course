@@ -4,6 +4,7 @@ version: "3.8"
 
 volumes:
   prometheus_data: {}
+  alertmanager_data: {}
 #  grafana_data: {}
 
 networks:
@@ -33,6 +34,16 @@ services:
     networks:
       - back-tier
     restart: always
+
+  alertmanager:
+    image: prom/alertmanager:latest
+    restart: unless-stopped
+    ports:
+      - "9093:9093"
+    volumes:
+      - ./alertmanager/:/config
+      - alertmanager_data:/data
+    command: --config.file=/config/alertmanager.yml --log.level=debug
 
   go-app:
     build:

@@ -1,7 +1,18 @@
 groups:
   - name: my-rules
     rules:
-      - record: job:go_app_response_latency:5m
-        expr: rate(go_app_response_latency_sum[5m]) / rate(go_app_response_latency_count[5m])
+      - record: job:go_app_response_latency:1m
+        expr: rate(go_app_response_latency_sum[1m]) / rate(go_app_response_latency_count[1m])
       - alert: GoAppDown
         expr: up{job="prom_go_app"} == 0
+        for: 1m
+      - alert: GoAppLatencyAbove5sec
+        expr: job:go_app_response_latency:1m >= 5
+        for: 2m
+        labels:
+          severity: critical
+      - alert: GoAppLatencyAbove2sec
+        expr: 2 < job:go_app_response_latency:1m >= 5
+        for: 2m
+        labels:
+          severity: warning
