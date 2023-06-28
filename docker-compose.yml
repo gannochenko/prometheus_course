@@ -43,6 +43,8 @@ services:
     volumes:
       - ./alertmanager/:/config
       - alertmanager_data:/data
+    networks:
+      - back-tier
     command: --config.file=/config/alertmanager.yml --log.level=debug
 
   go-app:

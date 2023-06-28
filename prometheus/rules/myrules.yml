@@ -6,6 +6,10 @@ groups:
       - alert: GoAppDown
         expr: up{job="prom_go_app"} == 0
         for: 1m
+        annotations:
+          summary: 'Hoppy Molly, the app is down!'
+          description: 'Instance {{ $labels.instance }} is down.'
+          app_link: 'http://localhost:8000/'
       - alert: GoAppLatencyAbove5sec
         expr: job:go_app_response_latency:1m >= 5
         for: 2m
@@ -16,3 +20,7 @@ groups:
         for: 2m
         labels:
           severity: warning
+        annotations:
+          summary: 'Go app latency is over 5 seconds.'
+          description: 'App latency of instance {{ $labels.instance }} of job {{ $labels.job }} is {{ $value }} seconds for more than 5 minutes.'
+          app_link: 'http://localhost:8000/'
