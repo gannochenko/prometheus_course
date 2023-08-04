@@ -1,3 +1,10 @@
+global:
+  smtp_from: 'example@gmail.com'
+  smtp_smarthost: smtp.gmail.com:587
+  smtp_auth_username: 'gannochenko.dev@gmail.com'
+  smtp_auth_identity: 'gannochenko.dev@gmail.com'
+  smtp_auth_password: 'dvcxxsilayxqwpqk'
+
 route:
   receiver: admin
 
@@ -5,8 +12,3 @@ receivers:
   - name: admin
     email_configs:
       - to: 'gannochenko.dev@gmail.com'
-        from: 'example@gmail.com'
-        smarthost: smtp.gmail.com:587
-        auth_username: 'gannochenko.dev@gmail.com'
-        auth_identity: 'gannochenko.dev@gmail.com'
-        auth_password: 'dvcxxsilayxqwpqk'
