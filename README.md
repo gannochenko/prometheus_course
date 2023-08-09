@@ -12,3 +12,7 @@ Linux metrics:
 # Free disk space less than 30%
 # (sum by (instance) (node_filesystem_free_bytes) / sum by (instance) (node_filesystem_size_bytes)) * 100 < 30
 ~~~
+
+## Routing tree editor
+
+https://prometheus.io/webtools/alerting/routing-tree-editor/

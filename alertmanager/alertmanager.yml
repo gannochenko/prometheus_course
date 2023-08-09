@@ -7,8 +7,29 @@ global:
 
 route:
   receiver: admin
+  routes:
+    - match:
+        app_type: go
+      # fallback receiver
+      receiver: go-admin
+      routes:
+        - match:
+            severity: critical
+          receiver: go-manager
+        - match:
+            severity: warning
+          receiver: go-teamlead
 
 receivers:
   - name: admin
     email_configs:
       - to: 'gannochenko.dev@gmail.com'
+  - name: go-admin
+    email_configs:
+      - to: 'gannochenko.sv@gmail.com'
+  - name: go-manager
+    email_configs:
+      - to: 'gannochenko.mgr@gmail.com'
+  - name: go-teamlead
+    email_configs:
+      - to: 'gannochenko.teamlead@gmail.com'
