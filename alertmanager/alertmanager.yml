@@ -29,7 +29,13 @@ receivers:
       - to: 'gannochenko.sv@gmail.com'
   - name: go-manager
     email_configs:
-      - to: 'gannochenko.mgr@gmail.com'
+      - to: 'gannochenko.sv@gmail.com'
+#  - name: go-manager
+#    slack_configs:
+#      - channel: '#prometheus'
+#        api_url: 'webhook url here'
+#        title: 'Message title'
+#        text: 'Message text'
   - name: go-teamlead
     email_configs:
       - to: 'gannochenko.teamlead@gmail.com'

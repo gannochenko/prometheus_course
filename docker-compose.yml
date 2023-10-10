@@ -5,6 +5,7 @@ version: "3.8"
 volumes:
   prometheus_data: {}
   alertmanager_data: {}
+  grafana_data: {}
 #  grafana_data: {}
 
 networks:
@@ -46,6 +47,17 @@ services:
     networks:
       - back-tier
     command: --config.file=/config/alertmanager.yml --log.level=debug
+
+  grafana:
+    image: grafana/grafana-enterprise
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    volumes:
+      - grafana_data:/var/lib/grafana
+    networks:
+      - back-tier
 
   go-app:
     build:
