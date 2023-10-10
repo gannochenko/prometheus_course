@@ -37,5 +37,6 @@ scrape_configs:
       - targets: ["grafana:3000"]
 
   - job_name: "pushgateway"
+    honor_labels: true
     static_configs:
       - targets: ["pushgateway:9091"]
